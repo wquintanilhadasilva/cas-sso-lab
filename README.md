@@ -64,3 +64,5 @@ Após subir os serviços na seção anterior, acesse no navegador:
 * [Installation Surrogate-Authentication](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html)
 * [Installation Surrogate-Authentication Preseleted](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html#preselected)
 * [GoogleAuthenticator](https://apereo.github.io/cas/5.0.x/installation/GoogleAuthenticator-Authentication.html)
+* [Configuration-Properties google-authenticator](https://apereo.github.io/cas/6.3.x/configuration/Configuration-Properties.html#google-authenticator)
+* [database-settings](https://apereo.github.io/cas/6.3.x/configuration/Configuration-Properties-Common.html#database-settings)
