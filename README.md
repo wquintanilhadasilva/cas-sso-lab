@@ -63,4 +63,4 @@ Após subir os serviços na seção anterior, acesse no navegador:
 * [Surrogate-Authentication-Storage-JDBC](https://apereo.github.io/cas/development/authentication/Surrogate-Authentication-Storage-JDBC.html)
 * [Installation Surrogate-Authentication](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html)
 * [Installation Surrogate-Authentication Preseleted](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html#preselected)
-
+* [GoogleAuthenticator](https://apereo.github.io/cas/5.0.x/installation/GoogleAuthenticator-Authentication.html)
