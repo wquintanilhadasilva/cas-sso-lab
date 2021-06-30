@@ -52,3 +52,15 @@ Após subir os serviços na seção anterior, acesse no navegador:
 ## Erros x suporte:
 
 [Erro de SSL](https://apereo.github.io/cas/5.3.x/installation/Troubleshooting-Guide.html#pkix-path-building-failed)
+
+
+# TODO - A experimentar
+
+[](https://apereo.github.io/cas/6.1.x/installation/Rest-Authentication.html)
+[](https://apereo.github.io/cas/6.1.x/protocol/REST-Protocol.html)
+[](https://apereo.github.io/cas/6.1.x/protocol/REST-Protocol.html#multiple-credentials)
+[](https://apereo.github.io/cas/development/authentication/Surrogate-Authentication.html#surrogate-authentication)
+[](https://apereo.github.io/cas/development/authentication/Surrogate-Authentication-Storage-JDBC.html)
+[](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html)
+[](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html#preselected)
+
