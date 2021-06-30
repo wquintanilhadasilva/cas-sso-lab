@@ -66,3 +66,6 @@ Após subir os serviços na seção anterior, acesse no navegador:
 * [GoogleAuthenticator](https://apereo.github.io/cas/5.0.x/installation/GoogleAuthenticator-Authentication.html)
 * [Configuration-Properties google-authenticator](https://apereo.github.io/cas/6.3.x/configuration/Configuration-Properties.html#google-authenticator)
 * [database-settings](https://apereo.github.io/cas/6.3.x/configuration/Configuration-Properties-Common.html#database-settings)
+* [GoogleAuthenticator-Authentication-Registration-JPA](https://apereo.github.io/cas/development/mfa/GoogleAuthenticator-Authentication-Registration-JPA.html)
+* [cas-mfa-google-authenticator](https://apereo.github.io/2018/06/10/cas-mfa-google-authenticator/)
+
