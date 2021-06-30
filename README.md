@@ -56,11 +56,11 @@ Após subir os serviços na seção anterior, acesse no navegador:
 
 # TODO - A experimentar
 
-[Rest-Authentication](https://apereo.github.io/cas/6.1.x/installation/Rest-Authentication.html)
-[REST-Protocol](https://apereo.github.io/cas/6.1.x/protocol/REST-Protocol.html)
-[Multiple-credentials](https://apereo.github.io/cas/6.1.x/protocol/REST-Protocol.html#multiple-credentials)
-[Surrogate-authentication](https://apereo.github.io/cas/development/authentication/Surrogate-Authentication.html#surrogate-authentication)
-[Surrogate-Authentication-Storage-JDBC](https://apereo.github.io/cas/development/authentication/Surrogate-Authentication-Storage-JDBC.html)
-[Installation Surrogate-Authentication](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html)
-[Installation Surrogate-Authentication Preseleted](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html#preselected)
+* [Rest-Authentication](https://apereo.github.io/cas/6.1.x/installation/Rest-Authentication.html)
+* [REST-Protocol](https://apereo.github.io/cas/6.1.x/protocol/REST-Protocol.html)
+* [Multiple-credentials](https://apereo.github.io/cas/6.1.x/protocol/REST-Protocol.html#multiple-credentials)
+* [Surrogate-authentication](https://apereo.github.io/cas/development/authentication/Surrogate-Authentication.html#surrogate-authentication)
+* [Surrogate-Authentication-Storage-JDBC](https://apereo.github.io/cas/development/authentication/Surrogate-Authentication-Storage-JDBC.html)
+* [Installation Surrogate-Authentication](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html)
+* [Installation Surrogate-Authentication Preseleted](https://apereo.github.io/cas/5.2.x/installation/Surrogate-Authentication.html#preselected)
 
