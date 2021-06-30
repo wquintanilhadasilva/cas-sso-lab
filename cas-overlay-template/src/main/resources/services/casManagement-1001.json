@@ -1,0 +1,18 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "http://localhost:8444/cas-management/",
+  "name" : "casManagement",
+  "id" : 1001,
+  "logoutType" : "BACK_CHANNEL",
+  "logoutUrl" : "http://localhost:8444/cas-management/logout",
+  "accessStrategy" : {
+    "@class" : "org.apereo.cas.services.SurrogateRegisteredServiceAccessStrategy",
+    "surrogateEnabled" : true,
+    "enabled": true,
+    "ssoEnabled": true,
+    "surrogateRequiredAttributes" : {
+      "@class" : "java.util.HashMap",
+      "givenName" : [ "java.util.HashSet", [ "Administrator" ] ]
+    }
+  }
+}
