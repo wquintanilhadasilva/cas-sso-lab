@@ -8,6 +8,7 @@ CREATE TABLE users
     last_name character varying(40) COLLATE pg_catalog."default",
     expired boolean,
     password character varying(100) COLLATE pg_catalog."default",
+    memberof character varying(20),
     CONSTRAINT users_pkey PRIMARY KEY (id),
     CONSTRAINT uk6dotkott2kjsp8vw4d0m25fb7 UNIQUE (email)
 )
