@@ -1,0 +1,8 @@
+{
+    "@class" : "org.apereo.cas.support.oauth.services.OAuthRegisteredService",
+    "clientId": "plcaprd-dev",
+    "clientSecret": "Z3ByZXBmdGVy",
+    "serviceId" : "^(https?)://.*",
+    "name" : "OAuthService",
+    "id" : 100
+  }

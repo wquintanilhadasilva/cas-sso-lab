@@ -90,6 +90,9 @@ dependencies {
 
     implementation "org.apereo.cas:cas-server-support-surrogate-webflow:${project.'cas.version'}"
     implementation "org.apereo.cas:cas-server-support-surrogate-authentication-jdbc:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-support-gauth:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-support-gauth-jpa:${project.'cas.version'}"
+    implementation "org.apereo.cas:cas-server-support-oauth-webflow:${project.'cas.version'}"
     // implementation "org.apereo.cas:cas-server-support-surrogate-authentication-rest:${project.'cas.version'}"
 
 }
