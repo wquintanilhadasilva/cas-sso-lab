@@ -1,0 +1,12 @@
+dn: uid=martins.eliel,dc=eb,dc=mil,dc=br
+cn: Cap Martins
+displayname: Cap Martins
+givenname: 81706464134
+initials: 0434590642
+mail: martins.eliel@eb.mil.br
+objectclass: inetOrgPerson
+objectclass: top
+sn: Eliel Martins
+title: CDS
+uid: martins.eliel
+userpassword: {MD5}F5GWLq3q3NkAHOiIFWmDcA==

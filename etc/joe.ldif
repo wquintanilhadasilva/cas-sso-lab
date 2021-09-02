@@ -1,0 +1,11 @@
+dn: uid=joe,dc=eb,dc=mil,dc=br
+cn: Cap Joe
+displayname: Cap Joe
+givenname: joe
+initials: 9
+mail: joe@eb.mil.br
+objectclass: inetOrgPerson
+objectclass: top
+sn: Joe
+title: CDS
+userpassword: {MD5}F5GWLq3q3NkAHOiIFWmDcA==

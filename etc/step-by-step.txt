@@ -1,0 +1,340 @@
+81706464134
+Teste@123
+
+
+REQUISITO:
+https://gitlab.basis.com.br/eb/sil_documentacao/-/blob/master/3%20-%20Requisitos/Especifica%C3%A7%C3%B5es/MCA/FEATURE/EB-52_EPE001_GerenciarAcesso/EB_SIMATEX_EPE001_01_52_GerAcesso_EfetuarLogin.feature
+
+cas.serviceRegistry.json.location=file:/etc/cas/services
+
+
+http://localhost/cas/login?service=http%3A%2F%2Flocalhost%3A80%2Fcas%2Foauth2.0%2FcallbackAuthorize%3Fclient_id%3Dplcaprd-dev%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A4200%252Fapi%252Foauth%252Flogin%26response_type%3Dcode%26client_name%3DCasOAuthClient
+
+
+
+
+// {
+//     "@class" : "org.apereo.cas.support.oauth.services.OAuthRegisteredService",
+//     "clientId": "plcaprd-dev",
+//     "clientSecret": "Z3ByZXBmdGVy",
+//     "serviceId" : "^(https?)://.*",
+//     "name" : "OAuthService",
+//     "id" : 100
+//   }
+
+
+{
+    "grant_type"= "authorization_code",
+    "code"= "OC-1601-fvGJzx4cJt8me7Wl3n8dkjn-A0clwyHq",
+    "redirect_ur"= "http://localhost:4200/api/oauth/login"
+}
+
+
+https://gitlab.basis.com.br/eb/sisgcorp_codigo_fonte/-/commit/c754fed8fb67b700777db1319d7e63f4203ab0b7
+
+https://sgo.basis.com.br/browse/BASIS-198144
+
+
+mvn flyway:migrate
+
+
+CAS EB
+sdk use java 8.0.275.open-adpt
+
+./build.sh
+
+./mvnw spring-boot:run
+./mvnw clean compile install -U spring-boot:run -X
+
+
+
+
+[174]            user: MCA
+[175]            password: yOTwkleo361nJfl
+
+
+
+repositórios:
+https://gitlab.basis.com.br/eb/mca-web/-/tree/master/src/main/resources/db/migration
+
+
+-----------------------------------------------------------------------------------------
+configuracao -> mvn clean install && java -Xmx256m -jar target/configuracao-0.44.5.war
+gateway -> mvn clean install -DskipTests && java -Xmx128m -jar target/sisgcorpgateway-0.46.1.war
+registro -> mvn clean install && java -Xmx512m -jar target/registro-0.44.5.war
+sigma -> mvn clean install && java -Xmx256m -jar target/sigma-0.44.5.war
+cliente web -> npm install && npm start
+
+
+
+MR's para aprovação
+	MCA: https://gitlab.basis.com.br/eb/mca-web/-/merge_requests/161
+	SSO: https://gitlab.basis.com.br/eb/sso_codigo_fonte/-/merge_requests/17
+	
+	
+	
+Subir containers:
+dev/git/eb/sso_codigo_fonte/src/main/docker/openldap
+/dev/git/eb/p-lc-aprd/p-lc-aprd_codigo_fonte/docker
+
+rodar o client:
+/dev/git/eb/p-lc-aprd/p-lc-aprd_codigo_fonte/client
+
+
+rodar o sso:
+/dev/git/eb/sso_codigo_fonte/
+	./build.sh run
+	./build.sh debug    ==> port 5000
+	
+	
+Liquibase:
+	/dev/git/eb/gerenciador_scripts_mca_codigo_fonte
+	MR gerado -> https://gitlab.basis.com.br/eb/gerenciador_scripts_mca_codigo_fonte/-/merge_requests/118
+	
+
+Acessar local dev:
+	http://localhost:8084/cas/login
+	
+LDAP:
+	http://localhost:8980/cmd.php
+		pwd: admin
+		user: cn=admin,dc=eb,dc=mil,dc=br
+		
+		Organisational Unit:
+			people:
+				user account:
+					Joe Admin, uid=joe, guid=adminuser
+					
+			groups:
+				posixgroups:
+					adminuser
+					
+		
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W admin
+		
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W admin "objectclass=account" cn uid homeDirectory
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W admin "objectclass=account"
+			
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,uid=joe,dc=eb,dc=mil,dc=br" -W admin "objectclass=posixAccount"
+		
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(objectClass=inetOrgPerson)"
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(objectClass=posixAccount)"
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(objectClass=posixAccount)" cn uid homeDirectory
+		
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(&(objectClass=posixAccount)(uid=joe))" cn uid homeDirectory
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=joe)" cn uid homeDirectory
+
+		
+		ldap.ldap
+			
+		
+		ldapsearch -x -b "dc=eb,dc=mil" -H ldap://localhost:8389
+		
+		Adicionar usuário a partir de um template:
+		ldapadd -c -x -D "cn=admin,dc=eb,dc=mil,dc=br" -W -f ./joe.ldif
+		
+		
+		ldapsearch -x -H ldap://ldap.tst.eb.basis.com.br -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=*eliel*)"
+		
+		uid=joe,dc=eb,dc=mil,dc=br
+		
+		ldapsearch -x -H ldap://ldap.tst.eb.basis.com.br -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=joe,dc=eb,dc=mil,dc=br)"
+		
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=joe)"
+		ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=joe,dc=eb,dc=mil,dc=br)"
+		
+		
+org.apereo.cas.authentication
+		
+		
+81706464134
+Teste@123
+
+audit:unknown
+
+
+81706464134
+Teste@123
+		
+# Entry 1: cn=Teste Admin,ou=people,dc=eb,dc=mil,dc=br
+dn: cn=Teste Admin,ou=people,dc=eb,dc=mil,dc=br
+cn: Teste Admin
+gidnumber: 500
+givenname: Teste
+homedirectory: /home/users/teste
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: top
+sn: Admin
+uid: teste
+uidnumber: 1000
+userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==
+
+
+* Workloads > load balance
+
+	https://rancher2-des.basis.com.br/p/c-5q9f7:p-ms5s9/ingresses
+		https://sso-eb.tst.basis.com.br/cas/login
+		http://ldap.tst.eb.basis.com.br/cmd.php?server_id=1&redirect=true
+
+
+ldapsearch -x -H ldap://ldap.tst.eb.basis.com.br -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=eliel*)"
+
+
+Adicionar usuário:
+
+cat > joe.ldif
+dn: uid=joe,dc=eb,dc=mil,dc=br
+cn: Cap Joe
+displayname: Cap Joe
+givenname: joe
+initials: 9
+mail: joe@eb.mil.br
+objectclass: inetOrgPerson
+objectclass: top
+sn: Joe
+title: CDS
+userpassword: {MD5}F5GWLq3q3NkAHOiIFWmDcA==
+
+ldapadd -c -x -H ldap://localhost:8389 -D "cn=admin,dc=eb,dc=mil,dc=br" -W -f ./joe.ldif 
+
+
+::UsuarioRepositoryImpl.buscarUsuarioPorUserId()::
+SELECT
+    u.id,
+    u.nome,
+    COALESCE (ui.nome_guerra, u.nome) as nomeguerra,
+    u.cpf,
+    u.email,
+    u.origem,
+    u.tipo_usuario as tipoUsuario,
+    coalesce (ol.id, olext.id) as idorgaologistica,
+    coalesce (ol.codom, olext.codom) as om,
+    coalesce (ol.nome, olext.nome) as nomeom,
+    coalesce (ol.sigla, olext.sigla) as siglaom,
+    pg.codigo as codigoPostoGraduacao,
+    pg.sigla as descricaoPostoGraduacao,
+    ui.id_militar as identidadeMilitar
+FROM
+    usuario u
+    LEFT JOIN usuario_interno ui ON ui.id_usuario = u.id
+    LEFT join usuario_externo ue on u.id = ue.id_usuario
+    LEFT join rel_usuario_externo_om ueo on (ue.id = ueo.id_usuario_externo and ueo.data_fim is null)
+    LEFT join orgao_logistica olext on ueo.id_orgao_logistica = olext.id
+    LEFT JOIN RH_QUADRO.militar m ON m.pes_identificador_cod = ui.id_militar
+    LEFT JOIN RH_QUADRO.posto_grad_espec pg ON pg.codigo = m.posto_grad_codigo
+    LEFT JOIN MATERIAL.orgao_logistica ol ON ol.id = ui.id_orgao_logistica
+WHERE
+    (u.cpf = ? OR u.email = ? OR u.id = (SELECT ui.id_usuario
+                                          FROM usuario_interno ui
+                                          where
+                                           ui.id_militar = ?
+                                           AND ROWNUM = 1)) and
+    u.status = 1
+
+
+
+
+
+
+
+
+
+    
+INSERT INTO MCA.USUARIO
+(ID, NOME, TIPO_USUARIO, CPF, EMAIL, TELEFONE_FIXO, TELEFONE_CELULAR, STATUS, BLOQUEADO, TENTATIVAS, ORIGEM)
+VALUES(999, 'Cap Joe', 0, '81706464134', 'joe@eb.mil.br', '1111111111', '2222222222', 1, 1, 0, 0);
+
+INSERT INTO MCA.USUARIO_INTERNO
+(ID, ID_USUARIO, ID_ORGAO_LOGISTICA, ID_MILITAR, DATA_INICIO, NOME_GUERRA, POSTO_GRADUACAO, ID_TIPO_USUARIO, DATA_FIM, COD_TIPO_MILITAR_CIVIL, ID_OM_CORP, SITUACAO_MOVIMENTACAO)
+VALUES(999, 999, 5, 'joe', TO_DATE('2021/08/30 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), 'JOE', 'Gen Bda', 1, TO_DATE('2022/08/30 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), 2, 15552, 0);
+
+
+
+
+ABRE O PERFIL COM SOLICITAR ACESSO!!
+
+https://gitlab.basis.com.br/eb/sil_documentacao/-/blob/master/3%20-%20Requisitos/Especifica%C3%A7%C3%B5es/MCA/FEATURE/EB-52_EPE001_GerenciarAcesso/EB_SIMATEX_EPE001_01_52_GerAcesso_EfetuarLogin.feature#L256
+
+Dados obrigatórios para inserir um usuário:
+	ID
+	NOME
+	TIPO_USUARIO            ??
+	CPF                     ??
+	EMAIL
+	TELEFONE_FIXO           ??
+	STATUS
+	BLOQUEADO
+	ORIGEM                  ??
+
+Dados obrigatórios para inserir um usuário interno:
+	ID
+	ID_USUARIO
+	ID_ORGAO_LOGISTICA     ??
+	DATA_INICIO            ??
+	ID_OM_CORP             ??
+
+
+
+
+
+.getAttributes().get("uid") = joe
+.getAttributes().get("cn") = Cap Joe
+displayName = Cap Joe
+givenName = joe
+initials = 9
+mail = joe@eb.mil.br
+sn = Joe
+
+mail, uid, sn, cn, initials, company, givenName, displayName
+
+
+
+Quais atributos no LDAP contêm estes dados:
+	A - Para criar um registro em USUARIO:
+        NOME
+        TIPO_USUARIO //1 - militar; 2 - civil [Tabela TIPO_USUARIO
+        CPF
+        EMAIL
+        TELEFONE_FIXO
+        STATUS
+        BLOQUEADO
+        ORIGEM
+
+	B - Para criar um registro em USUARIO_INTERNO:
+        ID
+        ID_USUARIO  // Referência para Tabela TP_USUARIO_INTERNO
+        ID_ORGAO_LOGISTICA
+        DATA_INICIO
+        ID_OM_CORP
+
+
+
+
+
+
+@Transactional(readOnly = true)
+public void gravarAuditoria(Long id, String acao, String sistema, String userAgent, String ip) {
+	UsuarioDTO usuario = usuarioService.findUsuarioPorId(id);
+	if(usuario != null) {
+	  gravarAuditoria(usuario, acao, sistema, userAgent, ip);
+	} else {
+	  LOGGER.warn("Usuário [{}] não encontrado para gerar o LOG de auditoria!", id);
+	}
+}
+
+@Transactional(readOnly = true)
+public void gravarAuditoria(String userId, String acao, String sistema, String userAgent, String ip) {
+	UsuarioDTO usuario = usuarioService.findUsuarioPorUserId(userId);
+	if(usuario != null) {
+	  gravarAuditoria(usuario, acao, sistema, userAgent, ip);
+	} else {
+	  LOGGER.warn("Usuário [{}] não encontrado para gerar o LOG de auditoria!", userId);
+	}
+}
+	
+	
+	
+	
+	
+
