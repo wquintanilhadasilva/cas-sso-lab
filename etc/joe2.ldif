@@ -1,0 +1,14 @@
+dn: uid=JOE,ou=people,dc=eb,dc=mil,dc=br
+objectClass: inetOrgPerson
+objectClass: zimbraAccount
+objectClass: amavisAccount
+mail: joe@eb.mil.br
+uid: joe
+title: CDS
+sn: Joe Teste
+cn: Cap Teste
+initials: 9
+company: 15552
+givenName: joe
+displayName: Cap Teste
+userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==

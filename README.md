@@ -70,3 +70,54 @@ Após subir os serviços na seção anterior, acesse no navegador:
 * [cas-mfa-google-authenticator](https://apereo.github.io/2018/06/10/cas-mfa-google-authenticator/)
 * [cas-mfa-google-authenticator step by step](https://fawnoos.com/2018/06/10/cas-mfa-google-authenticator/)
 
+
+# Outros
+
+```
+dn: uid=chico.gomes,dc=eb,dc=mil,dc=br
+cn: Chico Gomes
+departmentnumber: 025262
+displayname: GOMES
+givenname: 75894682312
+initials: 157321001
+mail: chico.gomes@eb.mil.br
+objectclass: inetOrgPerson
+objectclass: top
+sn: Chico Gomes
+title: 1º Ten
+uid: chico.gomes
+userpassword: {MD5}F5GWLq3q3NkAHOiIFWmDcA==
+```
+
+Comandos LDAP
+```
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W admin
+
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W admin "objectclass=account" cn uid homeDirectory
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W admin "objectclass=account"
+
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,uid=joe,dc=eb,dc=mil,dc=br" -W admin "objectclass=posixAccount"
+
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(objectClass=inetOrgPerson)"
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(objectClass=posixAccount)"
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(objectClass=posixAccount)" cn uid homeDirectory
+
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(&(objectClass=posixAccount)(uid=joe))" cn uid homeDirectory
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=joe)" cn uid homeDirectory
+
+ldapsearch -x -H ldap://localhost:8389 -b "uid=adriana.diniz@eb.mil.br,dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(|(uid=adriana.diniz@eb.mil.br)(mail=adriana.diniz@eb.mil.br))" cn uid homeDirectory
+
+ldapsearch -x -H ldap://localhost:8389 -b "uid=adriana.diniz,dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(|(uid=adriana.diniz@eb.mil.br)(mail=adriana.diniz@eb.mil.br))" cn uid homeDirectory
+
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(|(uid=adriana.diniz)(mail=adriana.diniz))" cn uid homeDirectory
+
+ldapsearch -x -H ldap://localhost:8389 -b "uid=adriana.diniz,dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(|(uid=adriana.diniz)(mail=adriana.diniz))"
+
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=adriana.diniz)" cn uid homeDirectory
+
+ldapsearch -x -H ldap://localhost:8389 -b "dc=eb,dc=mil,dc=br" -D "cn=admin,dc=eb,dc=mil,dc=br" -W "(uid=00396926983)" cn uid homeDirectory
+```
+
+```
+ldapadd -c -x -H ldap://localhost:8389 -D "cn=admin,dc=eb,dc=mil,dc=br" -W -f ./adriana.diniz2.ldif 
+```
