@@ -144,6 +144,8 @@ WITH (
 );
 
 
+-- pwd: testpass 
+
 INSERT INTO users(
  id, disabled, email, first_name, last_name, expired, password)
  VALUES (1, false, 'user1@test.com', 'test', 'user1', false, '$2y$12$7XQUDwK3QE7oBB0wmVpht.aT7gESI205SgWarj15Wz2Jt6OfglbQ.');
