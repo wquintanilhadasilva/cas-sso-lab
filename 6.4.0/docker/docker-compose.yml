@@ -1,0 +1,83 @@
+version: '3'
+services:
+
+  redis:
+    image: redis:4.0.9-alpine
+    container_name: cas_redis
+    ports:
+    - "6379:6379"
+    networks:
+      - cas-network
+
+  teste-postgres:
+    image: postgres
+    container_name: cas_postgres
+    environment:
+      POSTGRES_PASSWORD: "123456"
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./volume/database/postgresql:/var/lib/postgresql/data 
+    networks:
+      - cas-network
+      
+  teste-pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "wedson.silva@email.com.br"
+      PGADMIN_DEFAULT_PASSWORD: "123456"
+    ports:
+      - "16543:80"
+    depends_on:
+      - teste-postgres
+    networks:
+      - cas-network
+
+  openldap:
+    image: osixia/openldap
+    environment:
+      LDAP_LOG_LEVEL: "256"
+      LDAP_ORGANISATION: "Open LDAP Dev"
+      LDAP_DOMAIN: "basis.com.br"
+      LDAP_BASE_DN: ""
+      LDAP_ADMIN_PASSWORD: "admin"
+      LDAP_CONFIG_PASSWORD: "config"
+      LDAP_READONLY_USER: "true"
+      LDAP_READONLY_USER_USERNAME: "readonly"
+      LDAP_READONLY_USER_PASSWORD: "readonly"
+      LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_BACKEND: "mdb"
+      LDAP_TLS: "false"
+      LDAP_REPLICATION: "false"
+      KEEP_EXISTING_CONFIG: "false"
+      LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+      LDAP_SSL_HELPER_PREFIX: "ldap"
+    tty: true
+    stdin_open: true
+    ports:
+      - "8389:389"
+      - "8636:636"
+    domainname: "basis.com.br" # important: same as hostname
+    hostname: "basis.com.br"
+    networks:
+      - cas-network
+    volumes:
+      - ./data/slapd/database:/var/lib/ldap
+      - ./data/slapd/config:/etc/ldap/slapd.d
+
+  phpldapadmin:
+    image: osixia/phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_HTTPS: "false"
+    ports:
+      - "8980:80"
+    depends_on:
+      - openldap
+    networks:
+      - cas-network
+
+networks: 
+  cas-network:
+    driver: bridge

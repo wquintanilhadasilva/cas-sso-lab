@@ -1,0 +1,128 @@
+application:
+  database:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:15432/postgres
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    user: postgres
+    password: 123456
+
+
+server:
+  port: '8084'
+  ssl:
+    enabled: 'false'
+
+cas:
+  server:
+    name: https://localhost:${server.port}
+    prefix: ${cas.server.name}/cas
+  ticket:
+    registry:
+      redis:
+        port: '6379'
+        pool:
+          enabled: true
+        database: '0'
+        host: localhost
+  webflow:
+    session:
+      storage: 'true'
+  authn:
+    accept:
+      enabled: false
+    jdbc:
+      query[0]:
+        password: ${application.database.password}
+        password-encoder:
+          type: BCRYPT
+        user: ${application.database.user}
+        field-disabled: disabled
+        driver-class: ${application.database.driver-class-name}
+        url: ${application.database.url}
+        sql: SELECT * FROM users WHERE email = ?
+        field-password: password
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        field-expired: expired
+        principal-attribute-list: sn,cn:commonName,givenName,memberof,id,email,first_name,last_name,disabled
+    
+    ldap[0]:
+      principalAttributeId: givenName
+      dnFormat: uid=%s,dc=basis,dc=com,dc=br
+      maxPoolSize: '20'
+      type: DIRECT
+      search-filter: uid={user}
+      blockWaitTime: '5000'
+      principalAttributePassword: userPassword
+      passwordEncoder:
+        type: NONE
+      principalAttributeList: mail, uid, sn, cn, initials, company, givenName, displayName
+      idleTime: '5000'
+      useStartTls: 'false'
+      bind-dn: cn=admin,dc=basis,dc=com,dc=br
+      # Para remover o @ de endereços de e-mails, descomente as duas próximas linhas abaixo
+      # principalTransformation:
+      #   pattern: ([^@]*)@?.*
+      prunePeriod: '5000'
+      bind-credential: admin
+      passwordPolicy:
+        enabled: 'false'
+      subtreeSearch: 'true'
+      validatePeriod: '600'
+      validatePeriodically: 'true'
+      connectTimeout: '5000'
+      validateOnCheckout: 'true'
+      ldapUrl: ldap://localhost:8389
+      minPoolSize: '1'
+      base-dn: dc=basis,dc=com,dc=br
+      pool-passivator: BIND #values: BIND | NONE
+
+    oauth:
+      accessToken:
+        crypto:
+          signing:
+            key: AJSUmbNMbI_2IqV3ZKweTN0Hoer4Dq7Y_AwNnC53Q3GrHkLzKJDdEq0EFpyPTZZW8RcdwdraY9JLxl_kvWhfMA
+          encryption:
+            key: 5XMGKcbPPMHQu3O14aqyK8C4CoRUHcyo3kdlza_kAOw
+      crypto:
+        signing:
+          key: yFEK6C6lYBXe9D3d65DRYLiTQ1c1MN8J3QhOXhd7MQF-3QgituI2PtugjC8k-6_LnGX1nqLZMbWrC6c2gyNEgQ
+        encryption:
+          key: kqdUurhoPstm9PlvP1Knt7CBOdDJtlUEVXtFHyx3A_K4EOEaG3q6fxd_mUB6A7winLvYoTwk05Ohmvdr2vEkhQ
+
+  jdbc:
+    gen-ddl: true
+    show-sql: true
+
+  service-registry:
+    jpa:
+      url: ${application.database.url}
+      user: ${application.database.user}
+      password: ${application.database.password}
+      batch-size: 30
+      autocommit: true
+      dialect: ${application.database.database-platform}
+      driver-class: ${application.database.driver-class-name}
+    core:
+      management-type: DEFAULT
+      init-from-json: false
+    schedule:
+      start-delay: PT5S
+      repeat-interval: PT2M
+      enabled: true
+
+spring:
+  redis:
+    database: '0'
+    host: localhost
+    port: '6379'
+  session:
+    store-type: redis
+
+logging:
+  config: file:/etc/cas/config/log4j2.xml
+  level:
+    org:
+      apereo:
+        cas:
+          web: INFO
+          authentication: INFO
