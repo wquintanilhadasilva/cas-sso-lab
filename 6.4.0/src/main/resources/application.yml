@@ -75,6 +75,16 @@ cas:
       minPoolSize: '1'
       base-dn: dc=basis,dc=com,dc=br
       pool-passivator: BIND #values: BIND | NONE
+      
+    ldap[1]:
+      ldapUrl: ldap://localhost:8389
+      base-dn: dc=basis,dc=com,dc=br
+      bind-dn: cn=admin,dc=basis,dc=com,dc=br
+      bind-credential: admin
+      search-filter: uid={user}
+      subtreeSearch: true
+      useStartTls: false
+      principalAttributeList: cn, departmentNumber, displayName, mail, initials, sn, givenName, displayName, title, uid
 
     oauth:
       accessToken:
