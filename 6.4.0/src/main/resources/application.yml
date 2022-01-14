@@ -27,6 +27,11 @@ cas:
   webflow:
     session:
       storage: 'true'
+  # person-directory:
+  #   attributeResolutionEnabled: true
+  #   principal-attribute: authorities
+  #   active-attribute-repository-ids: AUTHORITIES, USER_DETAILS, ROLES
+    
   authn:
     accept:
       enabled: false
@@ -98,6 +103,62 @@ cas:
           key: yFEK6C6lYBXe9D3d65DRYLiTQ1c1MN8J3QhOXhd7MQF-3QgituI2PtugjC8k-6_LnGX1nqLZMbWrC6c2gyNEgQ
         encryption:
           key: kqdUurhoPstm9PlvP1Knt7CBOdDJtlUEVXtFHyx3A_K4EOEaG3q6fxd_mUB6A7winLvYoTwk05Ohmvdr2vEkhQ
+          
+    attribute-repository:
+      core:
+        aggregation: MERGE
+      # Carrega os dados complementares do usuário autenticado
+      jdbc[0]:
+        id: USER_DETAILS
+        driver-class: ${application.database.driver-class-name}
+        user: ${application.database.user}
+        password: ${application.database.password}
+        url: ${application.database.url}
+        sql: SELECT * FROM sg_usuario WHERE {0}
+        username: nm_login
+        singleRow: true
+        require-all-attributes: false
+        query-attributes:
+          id_usuario: id_usuario
+          in_tipo_usuario: in_tipo_usuario
+          in_dispensado_pgcade: in_dispensado_pgcade
+          nm_usuario: nm_usuario
+          nr_cpf: nr_cpf
+          nr_matricula: nr_matricula
+          nm_login: nm_login
+          de_email: de_email
+          dt_entrada: dt_entrada
+          dt_saida: dt_saida
+          de_imagem: de_imagem
+          in_status: in_status
+          id_unidade: id_unidade
+          roles: roles
+      # Carrega as roles do usuário autenticado
+      jdbc[1]:
+        attributes:
+          role: authorities
+        id: AUTHORITIES
+        driver-class: ${application.database.driver-class-name}
+        user: ${application.database.user}
+        password: ${application.database.password}
+        url: ${application.database.url}
+        sql: SELECT 'role' as attribute, role as value FROM sg_usuario_roles WHERE {0}
+        username: nm_login
+        singleRow: false
+        columnMappings:
+          attribute: value
+      # Carrega as roles do usuário convertendo várias linhas em uma única linha, separando por vírgula os resultados
+      jdbc[2]:
+        id: ROLES
+        driver-class: ${application.database.driver-class-name}
+        user: ${application.database.user}
+        password: ${application.database.password}
+        url: ${application.database.url}
+        sql: SELECT GROUP_CONCAT(role) as authorities FROM sg_usuario_roles WHERE {0}
+        username: nm_login
+        singleRow: true
+        require-all-attributes: false
+
 
   jdbc:
     gen-ddl: true
