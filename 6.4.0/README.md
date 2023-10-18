@@ -183,11 +183,6 @@ Senha  : Teste@123
 
 ## Configuração do Gateway
 
-Para que o gateway esteja apto a utilizar o CAS como SSO, siga a documentação abaixo:
-
-* [https://gitlab.basis.com.br/element/autenticacao_codigo_fonte](https://gitlab.basis.com.br/element/autenticacao_codigo_fonte)
-
-
 Estes ajustes devem ser efetuados no módulo Gateway ou no módulo responsável por tratar a segurança.
 
 Esta biblioteca é a responsável por realizar a interceptação das requisições, verificar a presença do `jwt-token` no header ou no cookie, redirecionar para o sso ou gerar o `jwt-token` no cookie e enviar aos microsserviços.
